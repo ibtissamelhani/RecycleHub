@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {AboutComponent} from "../about/about.component";
+import {ContactComponent} from "../contact/contact.component";
 
 @Component({
   selector: 'app-landing',
@@ -8,7 +9,8 @@ import {AboutComponent} from "../about/about.component";
   imports: [
     RouterLink,
     RouterLinkActive,
-    AboutComponent
+    AboutComponent,
+    ContactComponent
   ],
   templateUrl: './landing.component.html',
   styles: ``
