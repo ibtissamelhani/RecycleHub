@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {NavbarComponent} from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-auth-template',
   standalone: true,
   imports: [
-    RouterOutlet
+    RouterOutlet,
+    NavbarComponent,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './auth-template.component.html',
   styles: ``
