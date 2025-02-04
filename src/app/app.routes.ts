@@ -4,6 +4,7 @@ import {AuthTemplateComponent} from "./shared/auth-template/auth-template.compon
 import {RegisterComponent} from "./authentication/register/register.component";
 import {LoginComponent} from "./authentication/login/login.component";
 import {DashboardComponent} from "./particular/dashboard/dashboard.component";
+import {authGuard} from "./core/guards/auth.guard";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -19,5 +20,5 @@ export const routes: Routes = [
       }
     ],
   },
-  {path:"particular", component:DashboardComponent}
+  {path:"particular", component:DashboardComponent,canActivate: [authGuard]}
 ];
