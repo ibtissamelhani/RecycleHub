@@ -9,7 +9,7 @@
         Welcome to RecycleHub
       </h1>
 
-      <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="mt-8 grid grid-cols-6 gap-6">
         <div class="col-span-6 sm:col-span-3">
           <label for="FirstName" class="block text-sm font-medium text-gray-700">
             First Name
@@ -19,8 +19,15 @@
             type="text"
             id="FirstName"
             name="first_name"
+            formControlName="firstName"
             class="mt-1 py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched"
+            class="text-red-500"
+          >
+            First name is required
+          </small>
         </div>
 
         <div class="col-span-6 sm:col-span-3">
@@ -32,8 +39,15 @@
             type="text"
             id="LastName"
             name="last_name"
+            formControlName="lastName"
             class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched"
+            class="text-red-500"
+          >
+            Last name is required
+          </small>
         </div>
         <div class="col-span-6 sm:col-span-3">
           <label for="phone" class="block text-sm font-medium text-gray-700"> Phone Number </label>
@@ -42,8 +56,15 @@
             type="number"
             id="phone"
             name="phone"
+            formControlName="phone"
             class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('phone')?.invalid && registrationForm.get('phone')?.touched"
+            class="text-red-500"
+          >
+            Valid phone number is required
+          </small>
         </div>
         <div class="col-span-6 sm:col-span-3">
           <label for="date" class="block text-sm font-medium text-gray-700"> date </label>
@@ -52,8 +73,15 @@
             type="date"
             id="date"
             name="date"
+            formControlName="birthDate"
             class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('birthDate')?.invalid && registrationForm.get('birthDate')?.touched"
+            class="text-red-500"
+          >
+            Valid birth date is required
+          </small>
         </div>
 
         <div class="col-span-6">
@@ -63,8 +91,15 @@
             type="text"
             id="address"
             name="address"
+            formControlName="address"
             class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('address')?.invalid && registrationForm.get('address')?.touched"
+            class="text-red-500"
+          >
+            Address is required
+          </small>
         </div>
 
         <div class="col-span-6 sm:col-span-3">
@@ -74,8 +109,15 @@
             type="email"
             id="Email"
             name="email"
+            formControlName="email"
             class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+            class="text-red-500"
+          >
+            Valid email is required
+          </small>
         </div>
 
         <div class="col-span-6 sm:col-span-3">
@@ -87,12 +129,21 @@
             type="password"
             id="Password"
             name="password"
+            formControlName="password"
             class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
           />
+          <small
+            *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+            class="text-red-500"
+          >
+            Password must be at least 8 characters
+          </small>
         </div>
 
         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
           <button
+            type="submit"
+            [disabled]="registrationForm.invalid"
             class="inline-block shrink-0 rounded-md  bg-green-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-green-400  focus:ring-3 focus:outline-hidden"
           >
             Create an account
@@ -102,6 +153,9 @@
             Already have an account?
             <a routerLink="/authentication/login" class="text-gray-700 underline">Log in</a>.
           </p>
+        </div>
+        <div *ngIf="errorMessage" class="col-span-6 text-red-500">
+          {{ errorMessage }}
         </div>
       </form>
     </div>
