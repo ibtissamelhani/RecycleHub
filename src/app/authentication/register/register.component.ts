@@ -51,7 +51,7 @@ export class RegisterComponent {
       }
       const userData = {
         ...this.registrationForm.value,
-        type: 'particular'
+        role: 'particular'
       };
 
       const userId = await this.userService.addUser(userData);

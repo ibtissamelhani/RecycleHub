@@ -6,5 +6,5 @@ export interface User {
   address: string;
   phone: string;
   birthDate: string;
-  type: 'collector' | 'particular';
+  role: 'collector' | 'particular';
 }

@@ -8,7 +8,7 @@ export class RecycleHubDb extends Dexie{
   constructor() {
     super('RecycleHubDatabase');
     this.version(1).stores({
-      users: '++id,email,firstName,lastName,password,address,phone,birthDate,type'
+      users: '++id,email,firstName,lastName,password,address,phone,birthDate,role'
     })
   }
 }
