@@ -49,13 +49,17 @@ export class LoginComponent {
        return;
      }
       console.log("logged")
-
       localStorage.setItem("authUser", JSON.stringify({
         id: existingUser.id,
         type: existingUser.role
       }));
+      if (existingUser.role === "particular") {
+        await this.router.navigate(['/particular']);
+      }else {
+        await this.router.navigate(['/']);
+      }
 
-     await this.router.navigate(['/']);
+
     } catch (error) {
       console.error('authentication error:', error);
       this.errorMessage = 'authentication failed. Please try again.';
