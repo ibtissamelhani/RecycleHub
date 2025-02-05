@@ -30,35 +30,37 @@ export class LoginComponent {
     })
   }
 
-  async onSubmit(){
+  onSubmit(){
     this.errorMessage = '';
 
-    try {
-      const existingUser = await this.userService.getUserByEmail(
-        this.loginForm.value.email
-      );
+    this.userService.getUserByEmail(this.loginForm.value.email).subscribe({
+      next:(existingUser) =>{
 
-      if (!existingUser) {
-        this.errorMessage = 'user doesnt exist';
-        console.log("user doesnt exist")
-        return;
+        if (!existingUser) {
+          this.errorMessage = 'user doesnt exist';
+          console.log("user doesnt exist")
+          return;
+        }
+        if(existingUser.password != this.loginForm.value.password){
+          this.errorMessage = 'invalid email or password ';
+          console.log("invalid email or password ")
+          return;
+        }
+        console.log("logged")
+        localStorage.setItem("authUser", JSON.stringify({
+          id: existingUser.id,
+          type: existingUser.role
+        }));
+        if (existingUser.role === "particular") {
+           this.router.navigate(['/particular/dashboard']);
+        }else {
+           this.router.navigate(['/']);
+        }
+      },
+      error: (err) => {
+        console.error('Authentication error:', err);
+        this.errorMessage = 'Authentication failed. Please try again.';
       }
-     if(existingUser.password != this.loginForm.value.password){
-       this.errorMessage = 'invalid email or password ';
-       console.log("invalid email or password ")
-       return;
-     }
-      console.log("logged")
-
-      localStorage.setItem("authUser", JSON.stringify({
-        id: existingUser.id,
-        type: existingUser.role
-      }));
-
-     await this.router.navigate(['/']);
-    } catch (error) {
-      console.error('authentication error:', error);
-      this.errorMessage = 'authentication failed. Please try again.';
-    }
+    });
   }
 }

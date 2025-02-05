@@ -35,32 +35,39 @@ export class RegisterComponent {
     });
   }
 
-  async onSubmit() {
+  onSubmit() {
 
     this.errorMessage = '';
 
-    try {
-      const existingUser = await this.userService.getUserByEmail(
-        this.registrationForm.value.email
-      );
+    this.userService.getUserByEmail(this.registrationForm.value.email).subscribe({
+      next: (existingUser) => {
+        if (existingUser) {
+          this.errorMessage = 'Email already registered';
+          console.log("Email already registered")
+          return;
+        }
 
-      if (existingUser) {
-        this.errorMessage = 'Email already registered';
-        console.log("Email already registered")
-        return;
+        const userData = {
+          ...this.registrationForm.value,
+          role: 'particular'
+        };
+        this.userService.addUser(userData).subscribe({
+          next: (userId) => {
+            console.log('Registered successfully with userId:', userId);
+            this.router.navigate(['/authentication/login']);
+          },
+          error: (err) => {
+            console.error('Registration error:', err);
+            this.errorMessage = 'Registration failed. Please try again.';
+          }
+        });
+
+      },
+      error: (err) => {
+        console.error('Error checking user:', err);
+        this.errorMessage = 'An error occurred. Please try again.';
       }
-      const userData = {
-        ...this.registrationForm.value,
-        role: 'particular'
-      };
-
-      const userId = await this.userService.addUser(userData);
-      await this.router.navigate(['/authentication/login']);
-      console.log('registered')
-    } catch (error) {
-      console.error('Registration error:', error);
-      this.errorMessage = 'Registration failed. Please try again.';
-    }
+    })
   }
 
 }

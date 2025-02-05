@@ -24,10 +24,20 @@
       <a class="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-green-500 text-md" routerLink="/" routerLinkActive="text-green-600" >Home</a>
       <a class="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-green-500" href="#about">About</a>
       <a class="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-green-500" href="#contact">Contact</a>
-      <a class="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-green-500" routerLink="authentication/login" routerLinkActive="text-green-600">Login</a>
+      <a
+        *ngIf="isAuthenticated"
+        (click)="logout()"
+        class="block  mt-4  text-center text-gray-700 underline capitalize hover:text-green-600   lg:mt-0  lg:w-auto" routerLink="authentication/register" routerLinkActive="bg-gray-700">
+        sign out
+      </a>
+      <a
+        *ngIf="!isAuthenticated"
+        class="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-green-500" routerLink="authentication/login" routerLinkActive="text-green-600">Login</a>
     </div>
 
-    <a class="block px-5 py-2 mt-4 text- text-center text-white capitalize bg-green-600 rounded-lg lg:mt-0 hover:bg-green-500 lg:w-auto" routerLink="authentication/register" routerLinkActive="bg-gray-700">
+    <a
+      *ngIf="!isAuthenticated"
+      class="block px-5 py-2 mt-4  text-center text-white capitalize bg-green-600 rounded-lg lg:mt-0 hover:bg-green-500 lg:w-auto" routerLink="authentication/register" routerLinkActive="bg-gray-700">
       Get started
     </a>
   </div>
