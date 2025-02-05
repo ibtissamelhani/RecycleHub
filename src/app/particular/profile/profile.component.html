@@ -55,15 +55,15 @@
     </div>
     <div class="flex justify-end mt-6">
       <button
-        [disabled]="userForm.invalid"
         type="submit"
+        [disabled]="userForm.invalid"
         class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600">Save</button>
     </div>
   </form>
 </section>
-<section class="max-w-4xl p-6 mt-4 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+<section class="max-w-4xl p-6 mt-4 mx-auto bg-red-300/30 rounded-md shadow-md dark:bg-gray-800">
   <h2 class="text-3xl font-semibold text-gray-700  capitalize dark:text-white">Delete Your Account</h2>
-  <p class="text-gray-700">Permanently remove your Account and all of its contents from the LOGO.com platform. This action is not reversible, so please continue with caution.</p>
+  <p class="text-gray-700">Permanently remove your Account and all of its contents from the RecycleHub platform. This action is not reversible, so please continue with caution.</p>
   <div class="flex justify-end mt-6">
     <button
       (click)="deleteAccount()"

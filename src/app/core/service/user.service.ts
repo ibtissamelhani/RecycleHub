@@ -57,8 +57,19 @@ export class UserService {
                 .catch(err => observer.error(err));
             }
           },
-          error: (err) => observer.error(err)
+          error: (err) => observer.error(err),
         });
+      } else {
+        const updateWithTimestamp = {
+          ...updates,
+          lastUpdated: new Date().toISOString(),
+        };
+        this.db.users.update(id, updateWithTimestamp)
+          .then(updated => {
+            observer.next(updated);
+            observer.complete();
+          })
+          .catch(err => observer.error(err));
       }
     });
   }
