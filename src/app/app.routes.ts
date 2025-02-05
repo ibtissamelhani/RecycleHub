@@ -6,6 +6,7 @@ import {LoginComponent} from "./authentication/login/login.component";
 import {DashboardComponent} from "./particular/dashboard/dashboard.component";
 import {authGuard} from "./core/guards/auth.guard";
 import {ParticularDashboardComponent} from "./layouts/particular-dashboard/particular-dashboard.component";
+import {ProfileComponent} from "./particular/profile/profile.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -23,7 +24,8 @@ export const routes: Routes = [
   },
   {path:"particular", component:ParticularDashboardComponent,
   children:[
-    { path: '', component: DashboardComponent}
+    { path: 'dashboard', component: DashboardComponent},
+    { path: 'profile', component: ProfileComponent},
   ],
   canActivate: [authGuard]}
 ];
