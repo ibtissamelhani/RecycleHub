@@ -1,5 +1,5 @@
 <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-  <h2 class="text-lg font-semibold text-gray-700  capitalize dark:text-white">Account settings</h2>
+  <h2 class="text-3xl font-semibold text-gray-700  capitalize dark:text-white">Account settings</h2>
   <form [formGroup]="userForm" (ngSubmit)="onSave()">
     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
       <div>
@@ -12,7 +12,6 @@
           First name is required
         </small>
       </div>
-
       <div>
         <label class="text-gray-700 dark:text-gray-200" for="lastName">lastName</label>
         <input id="lastName" formControlName="lastName" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300">
@@ -23,7 +22,6 @@
           Last name is required
         </small>
       </div>
-
       <div>
         <label class="text-gray-700 dark:text-gray-200" for="address">address</label>
         <input id="address" formControlName="address" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300">
@@ -34,7 +32,6 @@
           Address is required
         </small>
       </div>
-
       <div>
         <label class="text-gray-700 dark:text-gray-200" for="phone">phone</label>
         <input id="phone" type="number" formControlName="phone" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300">
@@ -63,4 +60,13 @@
         class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600">Save</button>
     </div>
   </form>
+</section>
+<section class="max-w-4xl p-6 mt-4 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+  <h2 class="text-3xl font-semibold text-gray-700  capitalize dark:text-white">Delete Your Account</h2>
+  <p class="text-gray-700">Permanently remove your Account and all of its contents from the LOGO.com platform. This action is not reversible, so please continue with caution.</p>
+  <div class="flex justify-end mt-6">
+    <button
+      (click)="deleteAccount()"
+      class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-red-700 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Delete Account</button>
+  </div>
 </section>

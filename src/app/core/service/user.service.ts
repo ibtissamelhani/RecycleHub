@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {RecycleHubDb} from "../../database/recycle-hub-db";
 import {User} from "../../models/user";
+import {from, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,37 +13,57 @@ export class UserService {
     this.db = new RecycleHubDb();
   }
 
-  async addUser(user: User): Promise<number> {
-    const existingUser = await this.db.users.where('email').equals(user.email).first();
-    if (existingUser) {
-      throw new Error('Email already exists');
-    }
-    return this.db.users.add(user);
+
+  addUser(user: User): Observable<number> {
+    return new Observable<number>(observer => {
+
+      this.db.users.where('email').equals(user.email).first().then(existingUser => {
+
+        if (existingUser) {
+          observer.error('Email already exists');
+        } else {
+          this.db.users.add(user);
+        }
+      });
+    });
   }
 
-  async getUserByEmail(email: string): Promise<User | undefined> {
-    return await this.db.users
-      .where('email')
-      .equals(email)
-      .first();
-  }
-  async getUserById(id: number): Promise<User | undefined> {
-    return await this.db.users.get(id);
+
+  getUserByEmail(email: string): Observable<User | undefined> {
+    return from(this.db.users.where('email').equals(email).first());
   }
 
-  async updateUser(id: number, updates: Partial<User>): Promise<number> {
+  getUserById(id: number): Observable<User | undefined> {
+    return from(this.db.users.get(id));
+  }
 
-    if (updates.email) {
-      const existingUser = await this.getUserByEmail(updates.email);
-      if (existingUser && existingUser.id !== id) {
-        throw new Error('Email already in use');
+  updateUser(id: number, updates: Partial<User>): Observable<number> {
+    return new Observable<number>(observer => {
+      if (updates.email) {
+        this.getUserByEmail(updates.email).subscribe({
+          next: (existingUser) => {
+            if (existingUser && existingUser.id !== id) {
+              observer.error('Email already in use');
+            } else {
+              const updateWithTimestamp = {
+                ...updates,
+                lastUpdated: new Date().toISOString(),
+              };
+              this.db.users.update(id, updateWithTimestamp)
+                .then(updated => {
+                  observer.next(updated);
+                  observer.complete();
+                })
+                .catch(err => observer.error(err));
+            }
+          },
+          error: (err) => observer.error(err)
+        });
       }
-    }
+    });
+  }
 
-    const updateWithTimestamp = {
-      ...updates,
-      lastUpdated: new Date().toISOString()
-    };
-    return await this.db.users.update(id, updateWithTimestamp);
+  deleteUser(id: number): Observable<void> {
+    return from(this.db.users.delete(id));
   }
 }

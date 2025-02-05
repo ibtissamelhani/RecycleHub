@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserService} from "../../core/service/user.service";
 import {NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit {
   userForm!: FormGroup;
   userId = JSON.parse(<string>localStorage.getItem('authUser')).id;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -31,20 +32,48 @@ export class ProfileComponent implements OnInit {
     this.loadUserData();
   }
 
-  async loadUserData(): Promise<void> {
-    const user = await this.userService.getUserById(this.userId);
-    if (user) {
-      this.userForm.patchValue(user);
-    }
+  loadUserData() {
+    this.userService.getUserById(this.userId).subscribe({
+      next: (user) => {
+        if (user) {
+          this.userForm.patchValue(user);
+        }
+      },
+      error: (err) => {
+        console.error('Error loading user data:', err);
+      }
+    });
   }
 
-  async onSave(): Promise<void> {
+  onSave() {
     if (this.userForm.valid) {
-      await this.userService.updateUser(this.userId, this.userForm.value);
-      alert('User information updated successfully');
+      this.userService.updateUser(this.userId, this.userForm.value).subscribe({
+        next: () => {
+          alert('User information updated successfully');
+        },
+        error: (err) => {
+          console.error('Error updating user information:', err);
+          alert('Failed to update user information. Please try again.');
+        }
+      });
     } else {
       alert('Please fill out the form correctly');
     }
+  }
+
+  deleteAccount(){
+   this.userService.deleteUser(this.userId).subscribe({
+     next: () => {
+       localStorage.removeItem('authUser');
+       alert('Account deleted successfully');
+       this.router.navigate(['/']);
+     },
+     error: (err) => {
+       console.error('Error deleting account:', err);
+       alert('Failed to delete account. Please try again.');
+     }
+   });
+
   }
 
 }
