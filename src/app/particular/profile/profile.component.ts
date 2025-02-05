@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserService} from "../../core/service/user.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './profile.component.html',
   styles: ``
@@ -19,11 +21,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      address: [''],
-      phone: [''],
-      birthDate: [''],
+      firstName: ['',[Validators.required, Validators.minLength(2)]],
+      lastName: ['',[Validators.required, Validators.minLength(2)]],
+      address: ['', [Validators.required, Validators.minLength(5)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      birthDate: ['',[Validators.required]],
     });
 
     this.loadUserData();
