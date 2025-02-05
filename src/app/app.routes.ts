@@ -7,6 +7,7 @@ import {DashboardComponent} from "./particular/dashboard/dashboard.component";
 import {authGuard} from "./core/guards/auth.guard";
 import {ParticularDashboardComponent} from "./layouts/particular-dashboard/particular-dashboard.component";
 import {ProfileComponent} from "./particular/profile/profile.component";
+import {CollectionsComponent} from "./particular/collections/collections.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -26,6 +27,7 @@ export const routes: Routes = [
   children:[
     { path: 'dashboard', component: DashboardComponent},
     { path: 'profile', component: ProfileComponent},
+    { path: 'collections', component: CollectionsComponent},
   ],
   canActivate: [authGuard]}
 ];
