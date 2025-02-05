@@ -26,4 +26,23 @@ export class UserService {
       .equals(email)
       .first();
   }
+  async getUserById(id: number): Promise<User | undefined> {
+    return await this.db.users.get(id);
+  }
+
+  async updateUser(id: number, updates: Partial<User>): Promise<number> {
+
+    if (updates.email) {
+      const existingUser = await this.getUserByEmail(updates.email);
+      if (existingUser && existingUser.id !== id) {
+        throw new Error('Email already in use');
+      }
+    }
+
+    const updateWithTimestamp = {
+      ...updates,
+      lastUpdated: new Date().toISOString()
+    };
+    return await this.db.users.update(id, updateWithTimestamp);
+  }
 }
