@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import {LandingComponent} from "./pages/landing/landing.component";
-import {AuthTemplateComponent} from "./shared/auth-template/auth-template.component";
+import {AuthTemplateComponent} from "./layouts/auth-template/auth-template.component";
 import {RegisterComponent} from "./authentication/register/register.component";
 import {LoginComponent} from "./authentication/login/login.component";
 import {DashboardComponent} from "./particular/dashboard/dashboard.component";
 import {authGuard} from "./core/guards/auth.guard";
+import {ParticularDashboardComponent} from "./layouts/particular-dashboard/particular-dashboard.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -20,5 +21,9 @@ export const routes: Routes = [
       }
     ],
   },
-  {path:"particular", component:DashboardComponent,canActivate: [authGuard]}
+  {path:"particular", component:ParticularDashboardComponent,
+  children:[
+    { path: '', component: DashboardComponent}
+  ],
+  canActivate: [authGuard]}
 ];

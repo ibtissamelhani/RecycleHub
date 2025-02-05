@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -14,9 +14,17 @@ import {NgIf} from "@angular/common";
   styles: ``
 })
 export class NavbarComponent implements OnInit {
+  constructor(private router: Router) {
+  }
   isAuthenticated = false;
 
   ngOnInit(): void {
     this.isAuthenticated = !!localStorage.getItem('authUser');
+  }
+
+  logout(): void {
+    localStorage.removeItem('authUser');
+    this.isAuthenticated = false;
+    this.router.navigate(['/']);
   }
 }
