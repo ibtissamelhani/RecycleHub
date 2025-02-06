@@ -1,9 +1,10 @@
+import {Material} from "./material";
+
 export interface Collection {
   id?: number;
   particularId: number;
-  type: 'plastic' | 'glass' | 'paper' | 'metal';
-  weight: number;
-  photo?: string[];
+  materials: Material[];
+  photo?: string;
   address: string;
   dateTime: string;
   notes?: string;
