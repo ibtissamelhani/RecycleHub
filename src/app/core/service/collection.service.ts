@@ -26,4 +26,8 @@ export class CollectionService {
     return from(this.db.collections.where('particularId').equals(particularId).reverse()
       .sortBy('id'));
   }
+
+  deleteCollection(id: number): Observable<void> {
+    return from(this.db.collections.delete(id));
+  }
 }

@@ -65,18 +65,17 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount(){
-   this.userService.deleteUser(this.userId).subscribe({
-     next: () => {
-       localStorage.removeItem('authUser');
-       alert('Account deleted successfully');
-       this.router.navigate(['/']);
-     },
-     error: (err) => {
-       console.error('Error deleting account:', err);
-       alert('Failed to delete account. Please try again.');
-     }
-   });
-
+     this.userService.deleteUser(this.userId).subscribe({
+       next: () => {
+         localStorage.removeItem('authUser');
+         alert('Account deleted successfully');
+         this.router.navigate(['/']);
+       },
+       error: (err) => {
+         console.error('Error deleting account:', err);
+         alert('Failed to delete account. Please try again.');
+       }
+     });
   }
 
 }

@@ -4,7 +4,7 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {Collection} from "../../../models/collection";
 import {CollectionService} from "../../../core/service/collection.service";
 import {collectDateTimeValidator} from "../../../utils/collectDateTimeValidator";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-create-collection',
@@ -23,7 +23,7 @@ export class CreateCollectionComponent implements OnInit {
   collectionForm: FormGroup;
   authUserId = JSON.parse(<string>localStorage.getItem('authUser')).id;
 
-  constructor(private fb: FormBuilder, private collectionService: CollectionService) {
+  constructor(private fb: FormBuilder, private router:Router ,private collectionService: CollectionService) {
     this.collectionForm = this.fb.group({
       materials: this.fb.array([
         this.createMaterial()
@@ -85,6 +85,7 @@ export class CreateCollectionComponent implements OnInit {
         next: (id) => {
           console.log('Collection added successfully with ID:', id);
           alert('Collection created successfully');
+          this.router.navigate(["/particular/collections"])
         },
         error: (err) => {
           console.error('Error adding collection:', err);
