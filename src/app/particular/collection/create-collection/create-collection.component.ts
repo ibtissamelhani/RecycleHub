@@ -42,7 +42,7 @@ export class CreateCollectionComponent implements OnInit {
   createMaterial() {
     return this.fb.group({
       type: ['', Validators.required],
-      weight: [0, [Validators.required, Validators.min(0)]]
+      weight: [0, [Validators.required, Validators.min(1), Validators.max(30)]]
     });
   }
 
