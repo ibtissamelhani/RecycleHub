@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {Collection} from "../../../models/collection";
 import {CollectionService} from "../../../core/service/collection.service";
+import {timeRangeValidator} from "../../../utils/timeRangeValidator";
 
 @Component({
   selector: 'app-create-collection',
@@ -26,7 +27,7 @@ export class CreateCollectionComponent implements OnInit {
         this.createMaterial()
       ]),
       address: ['', Validators.required],
-      dateTime: ['', Validators.required],
+      dateTime: ['', [Validators.required, timeRangeValidator()]],
       notes: [''],
       photo:[''],
       status: ['pending', Validators.required],
