@@ -107,6 +107,9 @@
           <div *ngIf="collectionForm.get('dateTime')?.hasError('required')">
             <span>Date & Time is required</span>
           </div>
+          <div *ngIf="collectionForm.get('dateTime')?.hasError('pastDate')">
+            <span>The selected date cannot be in the past</span>
+          </div>
           <div *ngIf="collectionForm.get('dateTime')?.hasError('timeRange')">
             <span>The time must be between 09:00 and 18:00</span>
           </div>
