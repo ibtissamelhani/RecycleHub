@@ -23,7 +23,7 @@
   <div class="container px-5 py-8 mx-auto" >
     <div class="flex flex-wrap -m-4">
       <div class="p-4 md:w-1/3"  *ngFor="let collection of collections">
-        <div routerLink="/particular/dashboard" class="h-full border-2 border-gray-300 bg-gray-50/50 hover:shadow-lg border-opacity-60 rounded-lg overflow-hidden">
+        <div routerLink="details/{{collection.id}}" class="h-full border-2 border-gray-300 bg-gray-50/50 hover:shadow-lg border-opacity-60 rounded-lg overflow-hidden">
           <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{collection.photo}}" alt="blog">
           <div class="p-6">
             <div class="flex justify-between items-center ">
@@ -76,7 +76,7 @@
                 {{ collection.dateTime | date:'medium' }}
               </p>
             </div>
-            <div class="flex items-center flex-wrap ">
+            <div *ngIf="collection.status ==='pending' " class="flex items-center flex-wrap ">
               <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                 <button (click)="deleteCollection(collection.id!)" class="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

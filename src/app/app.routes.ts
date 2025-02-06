@@ -9,6 +9,7 @@ import {ParticularDashboardComponent} from "./layouts/particular-dashboard/parti
 import {ProfileComponent} from "./particular/profile/profile.component";
 import {CollectionsComponent} from "./particular/collection/collections/collections.component";
 import {CreateCollectionComponent} from "./particular/collection/create-collection/create-collection.component";
+import {CollectionDetailsComponent} from "./particular/collection/collection-details/collection-details.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'profile', component: ProfileComponent},
     { path: 'collections', component: CollectionsComponent},
     { path: 'collections/create', component: CreateCollectionComponent},
+    { path: 'collections/details/:id', component: CollectionDetailsComponent},
   ],
   canActivate: [authGuard]}
 ];

@@ -30,4 +30,7 @@ export class CollectionService {
   deleteCollection(id: number): Observable<void> {
     return from(this.db.collections.delete(id));
   }
+  getCollectionById(id: number): Observable<Collection | undefined> {
+    return from(this.db.collections.get(id));
+  }
 }
