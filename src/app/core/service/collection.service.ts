@@ -23,6 +23,7 @@ export class CollectionService {
   }
 
   getCollectionsByParticular(particularId: number): Observable<Collection[]> {
-    return from(this.db.collections.where('particularId').equals(particularId).toArray());
+    return from(this.db.collections.where('particularId').equals(particularId).reverse()
+      .sortBy('id'));
   }
 }

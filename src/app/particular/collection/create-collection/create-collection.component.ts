@@ -4,6 +4,7 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {Collection} from "../../../models/collection";
 import {CollectionService} from "../../../core/service/collection.service";
 import {collectDateTimeValidator} from "../../../utils/collectDateTimeValidator";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-create-collection',
@@ -12,7 +13,8 @@ import {collectDateTimeValidator} from "../../../utils/collectDateTimeValidator"
     ReactiveFormsModule,
     NgForOf,
     NgStyle,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './create-collection.component.html',
   styles: ``

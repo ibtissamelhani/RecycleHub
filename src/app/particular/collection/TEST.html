@@ -1,0 +1,93 @@
+<div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+  <!-- Status Badge -->
+  <div class="px-6 py-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+    <h2 class="text-xl font-bold text-gray-800 dark:text-white">
+      Collection #{{ collection.id || collection.particularId }}
+    </h2>
+    <span
+      [ngClass]="{
+            'bg-yellow-100 text-yellow-800': collection.status === 'pending',
+            'bg-blue-100 text-blue-800': collection.status === 'in-progress',
+            'bg-green-100 text-green-800': collection.status === 'validated',
+            'bg-red-100 text-red-800': collection.status === 'rejected',
+            'bg-orange-100 text-orange-800': collection.status === 'occupied'
+          }"
+      class="px-3 py-1 rounded-full text-xs font-semibold uppercase"
+    >
+          {{ collection.status }}
+        </span>
+  </div>
+
+  <!-- Collection Details -->
+  <div class="p-6">
+    <!-- Materials -->
+    <div class="mb-4">
+      <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Materials</h3>
+      <div class="space-y-2">
+        <div
+          *ngFor="let material of collection.materials"
+          class="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-3 rounded-lg"
+        >
+          <div class="flex items-center">
+                <span
+                  [ngClass]="{
+                    'text-blue-600': material.type === 'plastic',
+                    'text-green-600': material.type === 'glass',
+                    'text-yellow-600': material.type === 'paper',
+                    'text-gray-600': material.type === 'metal'
+                  }"
+                  class="mr-3 font-bold uppercase text-sm"
+                >
+                  {{ material.type }}
+                </span>
+          </div>
+          <span class="text-gray-800 dark:text-white font-medium">
+                {{ material.weight }} kg
+              </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="mb-4">
+      <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Address</h3>
+      <p class="text-gray-600 dark:text-gray-400">{{ collection.address }}</p>
+    </div>
+
+    <!-- Date & Time -->
+    <div class="mb-4">
+      <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Collection Date</h3>
+      <p class="text-gray-600 dark:text-gray-400">
+        {{ collection.dateTime | date:'medium' }}
+      </p>
+    </div>
+
+    <!-- Notes -->
+    <div *ngIf="collection.notes" class="mb-4">
+      <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Notes</h3>
+      <p class="text-gray-600 dark:text-gray-400 italic">{{ collection.notes }}</p>
+    </div>
+
+    <!-- Photos -->
+    <div class="mt-4">
+      <div class="grid grid-cols-3 gap-2">
+        <div
+          class="aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden"
+        >
+          <img
+            src="assets/images/fahim-mohammed-SWAHvtC8S2E-unsplash.jpg"
+            alt="Collection Photo"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collector Info -->
+  <div *ngIf="collection.collectorId" class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
+    <p class="text-sm text-gray-600 dark:text-gray-400">
+      Collected by Collector ID: {{ collection.collectorId }}
+    </p>
+  </div>
+</div>
