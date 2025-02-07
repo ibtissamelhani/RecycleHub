@@ -11,6 +11,7 @@ export class UserService {
 
   constructor() {
     this.db = new RecycleHubDb();
+    this.initializeCollectors();
   }
 
 
@@ -77,4 +78,35 @@ export class UserService {
   deleteUser(id: number): Observable<void> {
     return from(this.db.users.delete(id));
   }
+
+  private async initializeCollectors() {
+    const collectorsCount = await this.db.users.where('role').equals('collector').count();
+
+    if (collectorsCount === 0) {
+      const collectors: User[] = [
+        {
+          email: 'collector1@recyclehub.com',
+          password: 'password123',
+          firstName: 'John',
+          lastName: 'Collector',
+          address: 'City Center, Casablanca',
+          phone: '0600000001',
+          birthDate: '1990-01-01',
+          role: 'collector'
+        },
+        {
+          email: 'collector2@recyclehub.com',
+          password: 'password123',
+          firstName: 'ibtissam',
+          lastName: 'Collector',
+          address: 'City Center, marrakech',
+          phone: '0600000001',
+          birthDate: '2000-01-01',
+          role: 'collector'
+        }
+      ];
+      this.db.users.bulkAdd(collectors);
+    }
+  }
+
 }

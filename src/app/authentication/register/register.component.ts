@@ -46,22 +46,27 @@ export class RegisterComponent {
           console.log("Email already registered")
           return;
         }
+        console.log(1)
 
         const userData = {
           ...this.registrationForm.value,
           role: 'particular'
         };
+        console.log(2);
         this.userService.addUser(userData).subscribe({
           next: (userId) => {
+            console.log(7777777777)
+             this.router.navigate(['/authentication/login']);
+            console.log(3)
             console.log('Registered successfully with userId:', userId);
-            this.router.navigate(['/authentication/login']);
           },
           error: (err) => {
+            console.log(4)
             console.error('Registration error:', err);
             this.errorMessage = 'Registration failed. Please try again.';
-          }
+          },
         });
-
+        this.router.navigate(['/authentication/login']);
       },
       error: (err) => {
         console.error('Error checking user:', err);
