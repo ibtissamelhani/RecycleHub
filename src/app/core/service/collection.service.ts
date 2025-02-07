@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {RecycleHubDb} from "../../database/recycle-hub-db";
-import {from, Observable} from "rxjs";
+import {from, map, Observable} from "rxjs";
 import {Collection} from "../../models/collection";
 
 @Injectable({
@@ -32,5 +32,17 @@ export class CollectionService {
   }
   getCollectionById(id: number): Observable<Collection | undefined> {
     return from(this.db.collections.get(id));
+  }
+
+  checkMaxActiveRequests(particularId: number): Observable<boolean> {
+    return from(
+      this.db.collections
+        .where('particularId')
+        .equals(particularId)
+        .filter((c) => c.status !== 'validated' && c.status !== 'rejected')
+        .toArray()
+    ).pipe(
+      map((activeRequests) => activeRequests.length < 3)
+    );
   }
 }

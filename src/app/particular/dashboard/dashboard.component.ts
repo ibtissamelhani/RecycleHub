@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
   loadCollections() {
     this.collectionService.getCollectionsByParticular(this.particularId).pipe(
-      map(collections => collections.filter(collection => collection.status === 'pending'))
+      map(collections => collections.filter(collection => collection.status === 'occupied'))
     ).subscribe({
       next: (data) => this.occupiedCollections = data,
       error: (err) => console.error('Error fetching collections:', err)
