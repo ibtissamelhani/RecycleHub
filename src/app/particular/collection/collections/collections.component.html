@@ -27,7 +27,8 @@
           <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{collection.photo}}" alt="blog">
           <div class="p-6">
             <div class="flex justify-between items-center ">
-              <h2 class="text-xl font-bold text-gray-800 dark:text-white">
+              <h2 class="text-md font-bold text-red-400 dark:text-white">
+
               </h2>
               <span
                         [ngClass]="{
@@ -42,7 +43,7 @@
                   {{ collection.status }}
               </span>
             </div>
-            <div class="mb-4">
+            <div class="my-4">
               <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Materials</h3>
               <div class="grid grid-cols-3 gap-2 ">
                 <div
@@ -68,7 +69,7 @@
             </div>
             <div class="mb-4">
               <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Address</h3>
-              <p class="text-gray-600 dark:text-gray-400">{{ collection.address }}</p>
+              <p class="text-gray-600 dark:text-gray-400">{{ collection.address }} ,  {{collection.city}}</p>
             </div>
             <div class="mb-4">
               <h3 class="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Collection Date</h3>

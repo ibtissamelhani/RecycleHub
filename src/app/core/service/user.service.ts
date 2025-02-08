@@ -90,6 +90,7 @@ export class UserService {
           firstName: 'John',
           lastName: 'Collector',
           address: 'City Center, Casablanca',
+          city:'Casablanca',
           phone: '0600000001',
           birthDate: '1990-01-01',
           role: 'collector'
@@ -99,7 +100,8 @@ export class UserService {
           password: 'password123',
           firstName: 'ibtissam',
           lastName: 'Collector',
-          address: 'City Center, marrakech',
+          address: 'City Center',
+          city:'marrakech',
           phone: '0600000001',
           birthDate: '2000-01-01',
           role: 'collector'

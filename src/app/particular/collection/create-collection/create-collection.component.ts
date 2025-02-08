@@ -28,6 +28,7 @@ export class CreateCollectionComponent implements OnInit {
     this.collectionForm = this.fb.group({
       materials: this.fb.array([this.createMaterial()], maxTotalWeightValidator()),
       address: ['', Validators.required],
+      city: ['', Validators.required],
       dateTime: ['', [Validators.required, collectDateTimeValidator()]],
       notes: [''],
       photo:[''],

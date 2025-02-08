@@ -6,6 +6,7 @@ export interface Collection {
   materials: Material[];
   photo?: string;
   address: string;
+  city: string;
   dateTime: string;
   notes?: string;
   status: 'pending' | 'occupied' | 'in-progress' | 'validated' | 'rejected';
