@@ -30,9 +30,16 @@ export class CollectionService {
   deleteCollection(id: number): Observable<void> {
     return from(this.db.collections.delete(id));
   }
+
   getCollectionById(id: number): Observable<Collection | undefined> {
     return from(this.db.collections.get(id));
   }
+
+  getCollectionsByCity(userCity: string): Observable<Collection[]> {
+    const cityLowerCase = userCity.toLowerCase();
+    return from(this.db.collections.filter(c => c.city?.toLowerCase() === cityLowerCase  && c.status === 'pending').reverse().sortBy('id'));
+  }
+
 
   checkMaxActiveRequests(particularId: number): Observable<boolean> {
     return from(
