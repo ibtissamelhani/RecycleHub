@@ -1,17 +1,19 @@
- <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-4">
-   <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center">
-     <dt class="order-last text-lg font-medium text-gray-500">Total Sales</dt>
-     <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">$4.8m</dd>
+ <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-4">
+   <div class="flex flex-col rounded-lg bg-yellow-100 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Total Points</dt>
+     <dd class="text-4xl font-extrabold text-yellow-600 md:text-5xl">{{authUser.points}}</dd>
    </div>
    <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center">
-     <dt class="order-last text-lg font-medium text-gray-500">Total Sales</dt>
-
-     <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">$4.8m</dd>
+     <dt class="order-last text-lg font-medium text-gray-500">Pending Requests</dt>
+     <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">{{ pendingRequest }}</dd>
    </div>
-   <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center">
-     <dt class="order-last text-lg font-medium text-gray-500">Total Sales</dt>
-
-     <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">$4.8m</dd>
+   <div class="flex flex-col rounded-lg bg-green-50 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Validated Requests</dt>
+     <dd class="text-4xl font-extrabold text-green-600 md:text-5xl">{{ validatedRequest }}</dd>
+   </div>
+   <div class="flex flex-col rounded-lg bg-red-50 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Rejected Requests</dt>
+     <dd class="text-4xl font-extrabold text-red-600 md:text-5xl">{{ rejectedRequest }}</dd>
    </div>
  </div>
  <div class="flex flex-col items-center  xl:m-8">
