@@ -9,9 +9,11 @@ import {ParticularDashboardComponent} from "./layouts/particular-dashboard/parti
 import {CollectionsComponent} from "./particular/collection/collections/collections.component";
 import {CreateCollectionComponent} from "./particular/collection/create-collection/create-collection.component";
 import {CollectionDetailsComponent} from "./particular/collection/collection-details/collection-details.component";
-import {CollectorDashboardComponent} from "./layouts/collector-dashboard/collector-dashboard.component";
 import {ParticularProfileComponent} from "./particular/particular-profile/particular-profile.component";
 import {CollectorProfileComponent} from "./collector/collector-profile/collector-profile.component";
+import {CollectorDashboardComponent} from "./layouts/collector-dashboard/collector-dashboard.component";
+
+import {DashboardComponent as CoDashboard} from  "./collector/dashboard/dashboard.component"
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -33,8 +35,8 @@ export const routes: Routes = [
   },
   { path:'collector', component: CollectorDashboardComponent,
     children:[
+      { path: 'dashboard', component: CoDashboard},
       { path: 'profile', component: CollectorProfileComponent},
-
     ],
     canActivate: [authGuard]
   }

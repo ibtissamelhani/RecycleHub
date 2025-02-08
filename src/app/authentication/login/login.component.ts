@@ -54,7 +54,7 @@ export class LoginComponent {
         if (existingUser.role === "particular") {
            this.router.navigate(['/particular/dashboard']);
         }else if(existingUser.role === "collector") {
-           this.router.navigate(['/collector']);
+           this.router.navigate(['/collector/dashboard']);
         }
       },
       error: (err) => {

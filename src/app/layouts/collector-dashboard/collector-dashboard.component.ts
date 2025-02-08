@@ -4,11 +4,11 @@ import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/route
 @Component({
   selector: 'app-collector-dashboard',
   standalone: true,
-    imports: [
-        RouterLink,
-        RouterLinkActive,
-        RouterOutlet
-    ],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet
+  ],
   templateUrl: './collector-dashboard.component.html',
   styles: ``
 })
