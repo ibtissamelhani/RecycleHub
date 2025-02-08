@@ -67,7 +67,7 @@
           </small>
         </div>
         <div class="col-span-6 sm:col-span-3">
-          <label for="date" class="block text-sm font-medium text-gray-700"> date </label>
+          <label for="date" class="block text-sm font-medium text-gray-700"> birth date </label>
 
           <input
             type="date"
@@ -84,7 +84,7 @@
           </small>
         </div>
 
-        <div class="col-span-6">
+        <div class="col-span-6 sm:col-span-3">
           <label for="address" class="block text-sm font-medium text-gray-700"> address </label>
 
           <input
@@ -99,6 +99,23 @@
             class="text-red-500"
           >
             Address is required
+          </small>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label for="city" class="block text-sm font-medium text-gray-700"> city </label>
+
+          <input
+            type="text"
+            id="city"
+            name="city"
+            formControlName="city"
+            class="mt-1  py-3 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-xs focus:border-green-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-green-300"
+          />
+          <small
+            *ngIf="registrationForm.get('city')?.invalid && registrationForm.get('city')?.touched"
+            class="text-red-500"
+          >
+            city is required
           </small>
         </div>
 

@@ -29,9 +29,10 @@ export class RegisterComponent {
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
       birthDate: ['', [Validators.required]],
-      address: ['', [Validators.required, Validators.minLength(5)]]
+      address: ['', [Validators.required, Validators.minLength(5)]],
+      city: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
 
@@ -46,22 +47,23 @@ export class RegisterComponent {
           console.log("Email already registered")
           return;
         }
+        console.log(1)
 
         const userData = {
           ...this.registrationForm.value,
           role: 'particular'
         };
+        console.log(2);
         this.userService.addUser(userData).subscribe({
           next: (userId) => {
+             this.router.navigate(['/authentication/login']);
             console.log('Registered successfully with userId:', userId);
-            this.router.navigate(['/authentication/login']);
           },
           error: (err) => {
             console.error('Registration error:', err);
             this.errorMessage = 'Registration failed. Please try again.';
-          }
+          },
         });
-
       },
       error: (err) => {
         console.error('Error checking user:', err);
