@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RecycleHubDb} from "../../database/recycle-hub-db";
 import {User} from "../../models/user";
-import {from, Observable} from "rxjs";
+import {from, Observable, switchMap} from "rxjs";
+import {Material} from "../../models/material";
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,38 @@ export class UserService {
   deleteUser(id: number): Observable<void> {
     return from(this.db.users.delete(id));
   }
+
+  calculatePoints(materials: Material[]): number {
+    return materials.reduce((total, material) => {
+      switch (material.type) {
+        case 'plastic':
+          return total + material.weight * 2;
+        case 'glass':
+          return total + material.weight ;
+        case 'paper':
+          return total + material.weight ;
+        case 'metal':
+          return total + material.weight * 5;
+        default: return total;
+      }
+    }, 0);
+  }
+
+  updateUserPoints(particularId: number, pointsToAdd: number) {
+    return from(this.db.users.where('id').equals(particularId).first()).pipe(
+      switchMap((user) => {
+        if (user) {
+
+          user.points = user.points ? user.points + pointsToAdd : pointsToAdd;
+
+          return from(this.db.users.put(user));
+        } else {
+          throw new Error('User not found');
+        }
+      })
+    );
+  }
+
 
   private async initializeCollectors() {
     const collectorsCount = await this.db.users.where('role').equals('collector').count();

@@ -9,4 +9,5 @@ export interface User {
   phone: string;
   birthDate: string;
   role: 'collector' | 'particular';
+  points?:number;
 }

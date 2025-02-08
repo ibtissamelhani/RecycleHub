@@ -50,7 +50,8 @@ export class LoginComponent {
         localStorage.setItem("authUser", JSON.stringify({
           id: existingUser.id,
           city: existingUser.city,
-          type: existingUser.role
+          type: existingUser.role,
+          points: existingUser.points
         }));
         if (existingUser.role === "particular") {
            this.router.navigate(['/particular/dashboard']);
