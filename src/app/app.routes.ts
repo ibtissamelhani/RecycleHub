@@ -21,6 +21,7 @@ import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
 import {particularGuard} from "./core/guards/particular.guard";
 import {collectorGuard} from "./core/guards/collector.guard";
 import {profileResolver} from "./core/resolvers/profile.resolver";
+import {EditCollectionComponent} from "./particular/collection/edit-collection/edit-collection.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -38,6 +39,7 @@ export const routes: Routes = [
     { path: 'collections', component: CollectionsComponent},
     { path: 'collections/create', component: CreateCollectionComponent},
     { path: 'collections/details/:id', component: CollectionDetailsComponent},
+    { path: 'collections/edit/:id', component: EditCollectionComponent},
   ],
   canActivate: [authGuard, particularGuard]
   },

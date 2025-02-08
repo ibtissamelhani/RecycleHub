@@ -44,6 +44,11 @@ export class CollectionService {
     return from(this.db.collections.update(collectionId, { status, collectorId }));
   }
 
+  updateCollection(collection: Collection): Observable<number> {
+    // @ts-ignore
+    return from(this.db.collections.update(collection.id!, collection));
+  }
+
   getCollectionsByCollectorId(collectorId: number): Observable<Collection[]> {
     return from(this.db.collections.where('collectorId').equals(collectorId).toArray());
   }
