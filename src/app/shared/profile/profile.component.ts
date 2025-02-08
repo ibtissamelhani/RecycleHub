@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserService} from "../../core/service/user.service";
 import {NgIf} from "@angular/common";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +18,12 @@ export class ProfileComponent implements OnInit {
   userForm!: FormGroup;
   userId = JSON.parse(<string>localStorage.getItem('authUser')).id;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -30,7 +35,17 @@ export class ProfileComponent implements OnInit {
       birthDate: ['',[Validators.required]],
     });
 
-    this.loadUserData();
+    this.route.data.subscribe({
+      next: (data) => {
+        const user = data['userData'];
+        if (user) {
+          this.userForm.patchValue(user);
+          console.log("user loaded")
+        }
+      },
+      error: (err) => console.error('Error loading resolver data:', err),
+    });
+
   }
 
   loadUserData() {

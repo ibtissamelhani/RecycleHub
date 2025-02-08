@@ -50,7 +50,7 @@ export class LoginComponent {
         localStorage.setItem("authUser", JSON.stringify({
           id: existingUser.id,
           city: existingUser.city,
-          type: existingUser.role,
+          role: existingUser.role,
           points: existingUser.points
         }));
         if (existingUser.role === "particular") {

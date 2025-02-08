@@ -16,9 +16,16 @@ import {CollectorDashboardComponent} from "./layouts/collector-dashboard/collect
 import {DashboardComponent as CoDashboard} from  "./collector/dashboard/dashboard.component"
 import {DetailsComponent} from "./collector/collection/details/details.component";
 import {CollectionsComponent as CoCollections} from "./collector/collection/collections/collections.component";
+import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
+import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
+import {particularGuard} from "./core/guards/particular.guard";
+import {collectorGuard} from "./core/guards/collector.guard";
+import {profileResolver} from "./core/resolvers/profile.resolver";
+import {EditCollectionComponent} from "./particular/collection/edit-collection/edit-collection.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: 'authentication', component: AuthTemplateComponent,
     children: [
       {path: "register", component: RegisterComponent},
@@ -28,20 +35,22 @@ export const routes: Routes = [
   {path:"particular", component:ParticularDashboardComponent,
   children:[
     { path: 'dashboard', component: DashboardComponent},
-    { path: 'profile', component: ParticularProfileComponent},
+    { path: 'profile', component: ParticularProfileComponent, resolve:{userData: profileResolver}},
     { path: 'collections', component: CollectionsComponent},
     { path: 'collections/create', component: CreateCollectionComponent},
     { path: 'collections/details/:id', component: CollectionDetailsComponent},
+    { path: 'collections/edit/:id', component: EditCollectionComponent},
   ],
-  canActivate: [authGuard]
+  canActivate: [authGuard, particularGuard]
   },
   { path:'collector', component: CollectorDashboardComponent,
     children:[
       { path: 'dashboard', component: CoDashboard},
-      { path: 'profile', component: CollectorProfileComponent},
+      { path: 'profile', component: CollectorProfileComponent, resolve:{userData: profileResolver}},
       { path: 'collections', component: CoCollections},
       { path: 'collections/details/:id', component: DetailsComponent},
     ],
-    canActivate: [authGuard]
-  }
+    canActivate: [authGuard,collectorGuard]
+  },
+  { path: '**', component: NotFoundComponent }
 ];

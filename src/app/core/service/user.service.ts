@@ -17,17 +17,7 @@ export class UserService {
 
 
   addUser(user: User): Observable<number> {
-    return new Observable<number>(observer => {
-
-      this.db.users.where('email').equals(user.email).first().then(existingUser => {
-
-        if (existingUser) {
-          observer.error('Email already exists');
-        } else {
-          this.db.users.add(user);
-        }
-      });
-    });
+    return from(this.db.users.add(user));
   }
 
 
