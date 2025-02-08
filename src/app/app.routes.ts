@@ -15,6 +15,7 @@ import {CollectorDashboardComponent} from "./layouts/collector-dashboard/collect
 
 import {DashboardComponent as CoDashboard} from  "./collector/dashboard/dashboard.component"
 import {DetailsComponent} from "./collector/collection/details/details.component";
+import {CollectionsComponent as CoCollections} from "./collector/collection/collections/collections.component";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -38,6 +39,7 @@ export const routes: Routes = [
     children:[
       { path: 'dashboard', component: CoDashboard},
       { path: 'profile', component: CollectorProfileComponent},
+      { path: 'collections', component: CoCollections},
       { path: 'collections/details/:id', component: DetailsComponent},
     ],
     canActivate: [authGuard]

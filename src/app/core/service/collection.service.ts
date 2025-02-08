@@ -44,7 +44,9 @@ export class CollectionService {
     return from(this.db.collections.update(collectionId, { status, collectorId }));
   }
 
-
+  getCollectionsByCollectorId(collectorId: number): Observable<Collection[]> {
+    return from(this.db.collections.where('collectorId').equals(collectorId).toArray());
+  }
 
   checkMaxActiveRequests(particularId: number): Observable<boolean> {
     return from(
