@@ -40,6 +40,11 @@ export class CollectionService {
     return from(this.db.collections.filter(c => c.city?.toLowerCase() === cityLowerCase  && c.status === 'pending').reverse().sortBy('id'));
   }
 
+  updateCollectionStatus(collectionId: number, status: 'pending' | 'occupied' | 'in-progress' | 'validated' | 'rejected', collectorId: number): Observable<number> {
+    return from(this.db.collections.update(collectionId, { status, collectorId }));
+  }
+
+
 
   checkMaxActiveRequests(particularId: number): Observable<boolean> {
     return from(

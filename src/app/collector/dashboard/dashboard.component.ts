@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CollectionService} from "../../core/service/collection.service";
 import {Collection} from "../../models/collection";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,8 @@ import {DatePipe, NgClass, NgForOf} from "@angular/common";
   imports: [
     NgForOf,
     NgClass,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   templateUrl: './dashboard.component.html',
   styles: ``
