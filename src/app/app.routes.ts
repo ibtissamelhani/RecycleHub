@@ -20,6 +20,7 @@ import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
 import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
 import {particularGuard} from "./core/guards/particular.guard";
 import {collectorGuard} from "./core/guards/collector.guard";
+import {profileResolver} from "./core/resolvers/profile.resolver";
 
 export const routes: Routes = [
   { path:'', component:LandingComponent},
@@ -33,7 +34,7 @@ export const routes: Routes = [
   {path:"particular", component:ParticularDashboardComponent,
   children:[
     { path: 'dashboard', component: DashboardComponent},
-    { path: 'profile', component: ParticularProfileComponent},
+    { path: 'profile', component: ParticularProfileComponent, resolve:{userData: profileResolver}},
     { path: 'collections', component: CollectionsComponent},
     { path: 'collections/create', component: CreateCollectionComponent},
     { path: 'collections/details/:id', component: CollectionDetailsComponent},
@@ -43,7 +44,7 @@ export const routes: Routes = [
   { path:'collector', component: CollectorDashboardComponent,
     children:[
       { path: 'dashboard', component: CoDashboard},
-      { path: 'profile', component: CollectorProfileComponent},
+      { path: 'profile', component: CollectorProfileComponent, resolve:{userData: profileResolver}},
       { path: 'collections', component: CoCollections},
       { path: 'collections/details/:id', component: DetailsComponent},
     ],
