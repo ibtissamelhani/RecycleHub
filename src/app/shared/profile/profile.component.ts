@@ -67,7 +67,6 @@ export class ProfileComponent implements OnInit {
       console.log(22222)
       this.userService.updateUser(this.userId, this.userForm.value).subscribe({
         next: () => {
-          console.log(3333)
           alert('User information updated successfully');
         },
         error: (err) => {

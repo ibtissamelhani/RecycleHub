@@ -41,7 +41,7 @@
           <button
             type="submit"
             [disabled]="loginForm.invalid"
-            class="px-6 py-2 text-md font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-400 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-50">
+            class="px-6 py-2 text-md font-medium tracking-wide text-white capitalize disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-400 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-50">
             Sign In
           </button>
         </div>
@@ -49,7 +49,7 @@
       <div class="flex items-center justify-between mt-4">
         <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-        <a routerLink="/authentication/register" class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">or
+        <a routerLink="/authentication/register" class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline ">or
           sign up</a>
 
         <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
