@@ -3,6 +3,12 @@ import {CollectionService} from "../../../core/service/collection.service";
 import {Collection} from "../../../models/collection";
 import {CommonModule} from "@angular/common";
 import {UserService} from "../../../core/service/user.service";
+import {Observable} from "rxjs";
+import {Store} from "@ngrx/store";
+
+import * as CollectionActions from '../../../store/collections/collection.actions';
+import * as CollectionSelectors from '../../../store/collections/collection.selectors';
+
 
 @Component({
   selector: 'app-collections',
@@ -15,27 +21,31 @@ import {UserService} from "../../../core/service/user.service";
 })
 export class CollectionsComponent implements OnInit {
   authUser = JSON.parse(localStorage.getItem('authUser') || '{}');
-  collections: Collection[] = [];
-  errorMessage: string = '';
+
+
+  collections$: Observable<Collection[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
 
   constructor(
     private collectionService: CollectionService,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private store: Store
+  ) {
+    this.collections$ = this.store.select(CollectionSelectors.selectCollectorCollections);
+    this.loading$ = this.store.select(CollectionSelectors.selectCollectionLoading);
+    this.error$ = this.store.select(CollectionSelectors.selectCollectionError);
+  }
+
 
   ngOnInit(): void {
     this.loadCollections();
   }
 
   loadCollections(): void {
-    this.collectionService.getCollectionsByCollectorId(this.authUser.id).subscribe({
-      next: (data) => {
-        this.collections = data;
-      },
-      error: (err) => {
-        this.errorMessage = `Error loading collections: ${err.message}`;
-      }
-    });
+    this.store.dispatch(CollectionActions.loadCollectorCollections({
+      collectorId: this.authUser.id
+    }));
   }
 
   onValidateCollection(collectionId: number) {
