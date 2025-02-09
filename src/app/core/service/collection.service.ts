@@ -44,9 +44,8 @@ export class CollectionService {
     return from(this.db.collections.update(collectionId, { status, collectorId }));
   }
 
-  updateCollection(collection: Collection): Observable<number> {
-    // @ts-ignore
-    return from(this.db.collections.update(collection.id!, collection));
+  updateCollection(collectionId: number | null, updates: Partial<Collection>): Observable<number> {
+    return from(this.db.collections.update(collectionId!,updates))
   }
 
   getCollectionsByCollectorId(collectorId: number): Observable<Collection[]> {
