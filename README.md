@@ -4,10 +4,6 @@ Welcome to RecycleHub, the platform designed to promote sustainable waste manage
 
 ## Problem Statement
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
 Efficient and sustainable waste management remains a significant challenge. Many individuals lack a simple system to recycle their waste effectively while gaining tangible rewards.
 
 ## Solution
@@ -33,10 +29,10 @@ RecycleHub provides a user-friendly platform where individuals can:
 
 ## Technologies Used
 
-** Frontend: ** Angular 17
+**Frontend:** Angular 17
 
-** State Management: ** NgRx
+**State Management:** NgRx
 
-** Database: ** IndexedDB via Dexie.js
+**Database:** IndexedDB via Dexie.js
 
-** Styling: ** Tailwind CSS
+**Styling:** Tailwind CSS
