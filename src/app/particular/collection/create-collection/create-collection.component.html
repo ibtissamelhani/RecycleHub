@@ -60,7 +60,7 @@
             <div class="text-red-500 text-lg" *ngIf="material.get('weight')?.invalid && material.get('weight')?.touched">
               <span *ngIf="material.get('weight')?.hasError('required')">Weight is required</span>
               <span *ngIf="material.get('weight')?.hasError('min')">Weight must be at least 1</span>
-              <span *ngIf="material.get('weight')?.hasError('max')">Weight cannot exceed 30</span>
+              <span *ngIf="material.get('weight')?.hasError('max')">Weight cannot exceed 10</span>
             </div>
           </div>
 
