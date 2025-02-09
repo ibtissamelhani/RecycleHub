@@ -1,0 +1,37 @@
+ <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 mb-4">
+   <div class="flex flex-col rounded-lg bg-yellow-100 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Total Points</dt>
+     <dd class="text-4xl font-extrabold text-yellow-600 md:text-5xl">{{authUser.points}}</dd>
+   </div>
+   <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Pending Requests</dt>
+     <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">{{ pendingRequest }}</dd>
+   </div>
+   <div class="flex flex-col rounded-lg bg-green-50 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Validated Requests</dt>
+     <dd class="text-4xl font-extrabold text-green-600 md:text-5xl">{{ validatedRequest }}</dd>
+   </div>
+   <div class="flex flex-col rounded-lg bg-red-50 px-4 py-8 text-center">
+     <dt class="order-last text-lg font-medium text-gray-500">Rejected Requests</dt>
+     <dd class="text-4xl font-extrabold text-red-600 md:text-5xl">{{ rejectedRequest }}</dd>
+   </div>
+ </div>
+ <div class="flex flex-col items-center  xl:m-8">
+   <h1 class="text-2xl font-medium text-gray-800 capitalize lg:text-3xl dark:text-white">My Occupied Collections</h1>
+
+   <div class="mt-4">
+     <span class="inline-block w-40 h-1 bg-green-500 rounded-full"></span>
+     <span class="inline-block w-3 h-1 mx-1 bg-green-500 rounded-full"></span>
+     <span class="inline-block w-1 h-1 bg-green-500 rounded-full"></span>
+   </div>
+ </div>
+ <div class="grid grid-cols-2 gap-4 mb-4">
+   <div class=" p-4" *ngFor="let collection of occupiedCollections">
+     <div routerLink="/particular/collections/details/{{collection.id}}"  class="bg-gray-200/40 border border-gray-400 hover:shadow-lg p-6 rounded-lg">
+       <img class="h-40 rounded w-full object-cover object-center mb-6" src="{{collection.photo}}" alt="content">
+       <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">{{ collection.dateTime | date: 'medium' }}</h3>
+       <h2 class="text-lg text-gray-900 font-medium title-font mb-4">address : {{ collection.address }}</h2>
+       <p class="leading-relaxed text-base">note : {{ collection.notes}}</p>
+     </div>
+   </div>
+ </div>
