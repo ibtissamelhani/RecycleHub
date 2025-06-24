@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build -- --base-href=/
+        run: npm run build -- --base-href=/RecycleHub
 
       - name: Deploy to GitHub Pages
         uses: angular-schule/ghpages-deploy-action@v1
